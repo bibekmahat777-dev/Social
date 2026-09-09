@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>युरोप महादेश — प्रस्तुतीकरण</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@500;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16302A;
+    --ink-2:#1F433A;
+    --paper:#F2EFE3;
+    --paper-2:#EAE5D4;
+    --gold:#B4863A;
+    --gold-dark:#8E6A2A;
+    --moss:#5B7A5E;
+    --line:#D6CFB6;
+    --text:#26241C;
+    --text-soft:#5C5747;
+    --shadow: 0 10px 24px rgba(22,48,42,0.14);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--text);
+    font-family:'Noto Sans Devanagari', sans-serif;
+    line-height:1.7;
+    min-height:100vh;
+  }
+  h1,h2,h3,.serif{
+    font-family:'Noto Serif Devanagari', serif;
+  }
+  .screen{display:none;min-height:100vh;}
+  .screen.active{display:block;animation:fadein .5s ease;}
+  @keyframes fadein{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+  /* ---------- topbar ---------- */
+  .topbar{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 28px;
+    background:var(--ink);
+    color:var(--paper);
+    border-bottom:3px solid var(--gold);
+  }
+  .topbar .brand{
+    display:flex;align-items:center;gap:10px;
+    font-family:'Noto Serif Devanagari',serif;
+    font-size:1.05rem;
+    cursor:pointer;
+    letter-spacing:.3px;
+  }
+  .topbar .brand .mark{
+    width:26px;height:26px;flex:none;
+  }
+  .topbar nav{display:flex;gap:8px;}
+  .topbar nav button{
+    background:transparent;
+    border:1px solid rgba(242,239,227,0.35);
+    color:var(--paper);
+    padding:8px 16px;
+    border-radius:999px;
+    font-family:'Noto Sans Devanagari',sans-serif;
+    font-size:.92rem;
+    cursor:pointer;
+    transition:background .2s, border-color .2s;
+  }
+  .topbar nav button:hover{background:rgba(242,239,227,0.12);border-color:var(--gold);}
+  .topbar nav button.current{background:var(--gold);border-color:var(--gold);color:var(--ink);font-weight:600;}
+
+  /* ---------- HOME ---------- */
+  .hero{
+    position:relative;
+    background:radial-gradient(circle at 18% 20%, #234a40 0%, var(--ink) 55%, #0f231e 100%);
+    color:var(--paper);
+    padding:64px 24px 90px;
+    overflow:hidden;
+    text-align:center;
+  }
+  .hero .lines{
+    position:absolute;inset:0;opacity:.10;
+    background-image:
+      repeating-linear-gradient(0deg, transparent 0 38px, rgba(242,239,227,.6) 38px 39px),
+      repeating-linear-gradient(90deg, transparent 0 38px, rgba(242,239,227,.6) 38px 39px);
+    pointer-events:none;
+  }
+  .hero-inner{position:relative;max-width:760px;margin:0 auto;}
+  .compass{width:86px;height:86px;margin:0 auto 18px;display:block;opacity:.95;}
+  .kicker{
+    text-transform:none;
+    color:var(--gold);
+    font-weight:600;
+    letter-spacing:.4px;
+    font-size:.95rem;
+    margin-bottom:10px;
+  }
+  .hero h1{
+    font-size:clamp(2.3rem, 6vw, 3.4rem);
+    margin:0 0 14px;
+    line-height:1.25;
+  }
+  .hero p.sub{
+    font-size:1.08rem;
+    color:#DCE3D8;
+    max-width:560px;
+    margin:0 auto 30px;
+  }
+  .presenters{
+    display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:38px;
+  }
+  .presenters span{
+    background:rgba(242,239,227,0.08);
+    border:1px solid rgba(242,239,227,0.25);
+    padding:7px 16px;
+    border-radius:999px;
+    font-size:.92rem;
+    color:var(--paper);
+  }
+  .cta-row{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;}
+  .stamp{
+    position:relative;
+    width:230px;
+    padding:26px 20px 22px;
+    background:var(--paper);
+    color:var(--ink);
+    border:2px dashed var(--gold);
+    border-radius:14px;
+    cursor:pointer;
+    text-align:left;
+    transition:transform .18s ease, box-shadow .18s ease;
+    box-shadow:var(--shadow);
+  }
+  .stamp:hover{transform:translateY(-4px);}
+  .stamp .num{
+    font-family:'Noto Serif Devanagari',serif;
+    font-size:.8rem;
+    color:var(--gold-dark);
+    font-weight:700;
+    margin-bottom:6px;
+    display:block;
+  }
+  .stamp h3{margin:0 0 6px;font-size:1.25rem;}
+  .stamp p{margin:0;font-size:.9rem;color:var(--text-soft);}
+  .stamp .arrow{
+    position:absolute;right:18px;bottom:16px;
+    font-size:1.3rem;color:var(--gold-dark);
+  }
+
+  .about-strip{
+    max-width:920px;margin:-46px auto 60px;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:16px;
+    box-shadow:var(--shadow);
+    padding:28px 30px;
+    position:relative;
+    display:grid;grid-template-columns:1fr;gap:18px;
+  }
+  .about-strip h2{margin:0 0 6px;font-size:1.3rem;color:var(--ink);}
+  .about-strip p{margin:0;color:var(--text-soft);}
+  .fact-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:6px;
+  }
+  .fact-grid div{
+    background:var(--paper-2);
+    border-radius:10px;
+    padding:14px;
+    text-align:center;
+  }
+  .fact-grid .fnum{font-family:'Noto Serif Devanagari',serif;font-weight:700;font-size:1.25rem;color:var(--ink-2);display:block;}
+  .fact-grid .flabel{font-size:.82rem;color:var(--text-soft);}
+
+  @media (max-width:640px){
+    .fact-grid{grid-template-columns:1fr 1fr;}
+    .topbar{padding:14px 16px;}
+    .topbar .brand{font-size:.92rem;}
+  }
+
+  /* ---------- shared inner page header ---------- */
+  .page-head{
+    padding:38px 24px 20px;
+    max-width:1000px;margin:0 auto;
+    text-align:center;
+  }
+  .page-head .eyebrow{color:var(--gold-dark);font-weight:600;font-size:.9rem;margin-bottom:6px;}
+  .page-head h2{font-size:2rem;margin:0 0 8px;color:var(--ink);}
+  .page-head p{color:var(--text-soft);max-width:640px;margin:0 auto;}
+
+  .container{max-width:1000px;margin:0 auto;padding:10px 24px 70px;}
+
+  /* ---------- PRESENTATION topics ---------- */
+  .topic-list{display:flex;flex-direction:column;gap:16px;margin-top:20px;}
+  .topic-card{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:0 4px 14px rgba(22,48,42,0.06);
+  }
+  .topic-head{
+    display:flex;align-items:center;gap:16px;
+    padding:18px 20px;
+    cursor:pointer;
+    background:#fff;
+    border:none;width:100%;text-align:left;
+    font-family:inherit;
+  }
+  .topic-head .tnum{
+    flex:none;
+    width:40px;height:40px;border-radius:50%;
+    background:var(--ink);color:var(--paper);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Noto Serif Devanagari',serif;font-weight:700;
+  }
+  .topic-head .ttitle{flex:1;}
+  .topic-head .ttitle h3{margin:0;font-size:1.15rem;color:var(--ink);}
+  .topic-head .ttitle span{font-size:.85rem;color:var(--text-soft);}
+  .topic-head .chev{
+    flex:none;transition:transform .25s ease;color:var(--gold-dark);font-size:1.1rem;
+  }
+  .topic-card.open .chev{transform:rotate(180deg);}
+  .topic-body{
+    max-height:0;overflow:hidden;
+    transition:max-height .35s ease;
+    border-top:1px solid var(--line);
+  }
+  .topic-card.open .topic-body{max-height:900px;}
+  .topic-body-inner{
+    display:grid;grid-template-columns:220px 1fr;gap:22px;
+    padding:22px;
+  }
+  .topic-body-inner img{
+    width:100%;height:150px;object-fit:cover;border-radius:10px;
+    border:1px solid var(--line);
+  }
+  .topic-body-inner .cap{font-size:.78rem;color:var(--text-soft);text-align:center;margin-top:6px;}
+  .topic-body-inner ul{margin:0;padding-left:20px;}
+  .topic-body-inner li{margin-bottom:9px;color:var(--text);}
+  @media (max-width:640px){
+    .topic-body-inner{grid-template-columns:1fr;}
+  }
+
+  /* ---------- QUESTIONS grid ---------- */
+  .q-grid{
+    display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:24px;
+  }
+  .q-tile{
+    aspect-ratio:1/1;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:14px;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:6px;
+    cursor:pointer;
+    transition:transform .15s ease, border-color .15s ease, background .15s ease;
+  }
+  .q-tile:hover{transform:translateY(-3px);border-color:var(--gold);}
+  .q-tile .qn{
+    font-family:'Noto Serif Devanagari',serif;font-size:1.6rem;font-weight:700;color:var(--ink);
+  }
+  .q-tile .ql{font-size:.72rem;color:var(--text-soft);}
+  .q-tile.answered{background:var(--paper-2);border-color:var(--moss);}
+  .q-tile.answered .qn{color:var(--moss);}
+  @media (max-width:760px){ .q-grid{grid-template-columns:repeat(3,1fr);} }
+  @media (max-width:460px){ .q-grid{grid-template-columns:repeat(2,1fr);} }
+
+  /* ---------- answer panel ---------- */
+  .answer-panel{
+    max-width:760px;margin:26px auto 0;
+    background:#fff;border:1px solid var(--line);border-radius:16px;
+    box-shadow:var(--shadow);
+    padding:30px;
+  }
+  .answer-panel .qtag{
+    display:inline-block;background:var(--ink);color:var(--paper);
+    padding:5px 14px;border-radius:999px;font-size:.82rem;margin-bottom:14px;
+  }
+  .answer-panel h3{margin:0 0 16px;color:var(--ink);font-size:1.3rem;}
+  .answer-panel .a-label{color:var(--gold-dark);font-weight:600;font-size:.85rem;margin-bottom:6px;}
+  .answer-panel p.a-text{margin:0;font-size:1.02rem;}
+  .answer-nav{display:flex;justify-content:space-between;margin-top:24px;gap:10px;}
+  .answer-nav button{
+    background:var(--ink);color:var(--paper);border:none;
+    padding:10px 18px;border-radius:999px;cursor:pointer;font-family:inherit;font-size:.9rem;
+  }
+  .answer-nav button.secondary{background:transparent;color:var(--ink);border:1px solid var(--line);}
+  .answer-nav button:disabled{opacity:.35;cursor:default;}
+
+  footer{
+    text-align:center;padding:26px;color:var(--text-soft);font-size:.85rem;
+    border-top:1px solid var(--line);
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand" onclick="showScreen('home')">
+    <svg class="mark" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="none" stroke="#B4863A" stroke-width="2"/><path d="M20 5 L23 18 L20 20 L17 18 Z" fill="#F2EFE3"/><path d="M20 35 L23 22 L20 20 L17 22 Z" fill="#5B7A5E"/></svg>
+    युरोप महादेश
+  </div>
+  <nav>
+    <button id="nav-home" onclick="showScreen('home')">गृहपृष्ठ</button>
+    <button id="nav-presentation" onclick="showScreen('presentation')">प्रस्तुतीकरण</button>
+    <button id="nav-questions" onclick="showScreen('questions')">प्रश्नहरू</button>
+  </nav>
+</div>
+
+<!-- ================= HOME ================= -->
+<section class="screen active" id="screen-home">
+  <div class="hero">
+    <div class="lines"></div>
+    <div class="hero-inner">
+      <svg class="compass" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="46" fill="none" stroke="#B4863A" stroke-width="1.5"/>
+        <circle cx="50" cy="50" r="3" fill="#B4863A"/>
+        <path d="M50 8 L58 50 L50 92 L42 50 Z" fill="#F2EFE3" opacity="0.9"/>
+        <path d="M8 50 L50 42 L92 50 L50 58 Z" fill="#5B7A5E" opacity="0.85"/>
+      </svg>
+      <div class="kicker">सामाजिक अध्ययन &nbsp;·&nbsp; पाठ १३</div>
+      <h1>युरोप महादेश</h1>
+      <p class="sub">प्रायद्वीपको प्रायद्वीप भनेर चिनिने, संसारकै सबैभन्दा विकसित महादेशको भौगोलिक यात्रा — यस प्रस्तुतीकरणमार्फत।</p>
+      <div class="presenters">
+        <span>प्रस्तुतकर्ता: विवेक महत</span>
+        <span>प्रकेत पाठक</span>
+        <span>कृतन पन्ता</span>
+      </div>
+      <div class="cta-row">
+        <div class="stamp" onclick="showScreen('presentation')">
+          <span class="num">भाग १</span>
+          <h3>प्रस्तुतीकरण</h3>
+          <p>युरोपको परिचय, अवस्थिति, भौगोलिक विभाजन, हावापानी र वनस्पति — विषयवार हेर्नुहोस्।</p>
+          <span class="arrow">→</span>
+        </div>
+        <div class="stamp" onclick="showScreen('questions')">
+          <span class="num">भाग २</span>
+          <h3>प्रश्नहरू</h3>
+          <p>पाठसँग सम्बन्धित १० वटा प्रश्न अभ्यास गर्नुहोस्, हरेकको उत्तरसहित।</p>
+          <span class="arrow">→</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="about-strip">
+    <h2>महादेशको झलक</h2>
+    <p>क्षेत्रफलमा अष्ट्रेलियापछि सबैभन्दा सानो भए पनि, युरोप विकासका हिसाबले संसारकै अग्रणी महादेश हो। यसको सानो क्षेत्रफलभित्र ४४ स्वतन्त्र देशहरू, अनगिन्ती प्रायद्वीपहरू र विविध हावापानी-वनस्पति अटाएका छन्।</p>
+    <div class="fact-grid">
+      <div><span class="fnum">१,०४,९८,०००</span><span class="flabel">वर्ग कि.मि. क्षेत्रफल</span></div>
+      <div><span class="fnum">४४</span><span class="flabel">स्वतन्त्र देशहरू</span></div>
+      <div><span class="fnum">१६</span><span class="flabel">भूपरिवेष्ठित देशहरू</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PRESENTATION ================= -->
+<section class="screen" id="screen-presentation">
+  <div class="page-head">
+    <div class="eyebrow">प्रस्तुतीकरणका विषयहरू</div>
+    <h2>कुनै पनि शीर्षकमा क्लिक गर्नुहोस्</h2>
+    <p>प्रत्येक शीर्षक खोल्दा सम्बन्धित तस्बिर र मुख्य बुँदाहरू देखिनेछन्।</p>
+  </div>
+  <div class="container">
+    <div class="topic-list" id="topic-list"></div>
+  </div>
+</section>
+
+<!-- ================= QUESTIONS ================= -->
+<section class="screen" id="screen-questions">
+  <div class="page-head">
+    <div class="eyebrow">अभ्यास प्रश्नहरू</div>
+    <h2>१० वटा प्रश्नमध्ये एउटा छान्नुहोस्</h2>
+    <p>प्रश्न नम्बरमा क्लिक गर्दा त्यसको उत्तर देखिनेछ।</p>
+  </div>
+  <div class="container">
+    <div class="q-grid" id="q-grid"></div>
+    <div class="answer-panel" id="answer-panel" style="display:none;">
+      <span class="qtag" id="ans-tag">प्रश्न १</span>
+      <h3 id="ans-question"></h3>
+      <div class="a-label">उत्तर</div>
+      <p class="a-text" id="ans-text"></p>
+      <div class="answer-nav">
+        <button class="secondary" id="btn-prev" onclick="navQuestion(-1)">← अघिल्लो</button>
+        <button id="btn-next" onclick="navQuestion(1)">अर्को →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>विवेक महत · प्रकेत पाठक · कृतन पन्ता &nbsp;|&nbsp; सामाजिक अध्ययन, पाठ १३ — युरोप महादेश</footer>
+
+<script>
+const WIKI = (name, w=700) => `https://commons.wikimedia.org/wiki/Special:FilePath/${name}?width=${w}`;
+
+const topics = [
+  {
+    title: "परिचय",
+    sub: "Introduction",
+    img: WIKI("Physical_Map_of_Europe.jpg"),
+    cap: "युरोप महादेशको नक्सा",
+    points: [
+      "क्षेत्रफलको हिसाबले युरोप अष्ट्रेलियापछि संसारकै दोस्रो सबैभन्दा सानो महादेश हो, तर विकासमा भने सबैभन्दा अगाडि छ। यसको क्षेत्रफल १,०४,९८,००० वर्ग कि.मि. रहेको छ।",
+      "पूर्व-पश्चिम फैलावट ६,४०० कि.मि. र उत्तर-दक्षिण फैलावट ४,८०० कि.मि. छ।",
+      "सानो महादेश भए पनि युरोपमा ४४ स्वतन्त्र देशहरू र थुप्रै नियन्त्रित क्षेत्रहरू छन्।",
+      "युरोप आफैं एउटा ठूलो प्रायद्वीप हो, र यसभित्र स्क्यान्डिनेभिया, आइबेरियन, इटालियन र ग्रिक जस्ता साना प्रायद्वीपहरू पनि छन्। त्यसैले यसलाई 'प्रायद्वीपको प्रायद्वीप' भनिन्छ।",
+      "रोचक तथ्य: ग्रिक भाषाको 'युरोपा' शब्दबाट युरोप नाम बनेको हो, जुन ग्रिक पौराणिक कथाकी एक राजकुमारीको नाम थियो। विश्वको सबैभन्दा सानो सहर क्रोएसियाको 'हम' युरोपमै छ। क्षेत्रफलमा सबैभन्दा ठूलो देश रूस र सबैभन्दा सानो देश भ्याटिकन सिटी पनि युरोपमै पर्छन्।"
+    ]
+  },
+  {
+    title: "अवस्थिति",
+    sub: "Location",
+    img: WIKI("Fjord_Norway.jpg"),
+    cap: "युरोपको समुद्री किनार (नर्वे)",
+    points: [
+      "युरोप पृथ्वीको उत्तरी गोलार्धमा पर्छ, प्रायः भाग उत्तरी तापीय क्षेत्रभित्र।",
+      "यो ३९° देखि ७१° उत्तर अक्षांश र २०° पूर्वदेखि ६५° पश्चिमी देशान्तरबीच फैलिएको छ।",
+      "पूर्वमा युराल पर्वतले एसियाबाट, दक्षिण-पूर्वमा ककेसस पर्वतले, र पश्चिममा आन्ध्र (अटलान्टिक) महासागरले युरोपलाई छुट्याएको छ। उत्तरमा आर्कटिक महासागर र दक्षिणमा भूमध्यसागर, ब्ल्याक सी र क्यास्पियन सागर छन्।",
+      "स्पेन र मोरक्कोको बीचमा रहेको जिब्राल्टर स्ट्रेटले युरोप महादेशलाई अफ्रिकाबाट छुट्याएको छ।",
+      "लामो समुद्री तटका कारण अधिकांश देशमा समुद्रको पहुँच छ, तर स्विट्जरल्यान्ड र अस्ट्रिया लगायत १६ ओटा भूपरिवेष्ठित देशहरू पनि छन्।"
+    ]
+  },
+  {
+    title: "भौगोलिक विभाजन",
+    sub: "Physical Divisions",
+    img: WIKI("Alps.jpg"),
+    cap: "आल्प्स पर्वत श्रृंखला",
+    points: [
+      "भूस्वरूपको आधारमा युरोपलाई ३ मुख्य भौगोलिक प्रदेशमा विभाजन गरिन्छ।",
+      "१. उत्तर-पश्चिमी उच्च भूमि: नर्वे र स्विडेनदेखि स्कटल्यान्डसम्म फैलिएको, स्क्यान्डिनेभियाको रूपमा चिनिने यो भाग मोडदार पहाड र कडा चट्टानबाट बनेको छ; हिमनदीको क्षयीकरणले यहाँ कोमल ढलान बनेको छ।",
+      "२. मध्य युरोपेली मैदान: 'रूसी प्लेट' पनि भनिने यो विशाल त्रिकोणीय मैदान अटलान्टिक तटदेखि युराल पर्वतसम्म फैलिएको छ। राइन, एल्बे, भोल्गा, निपर जस्ता ठूला नदीले ल्याएको उर्वर माटोले बनेको यो क्षेत्र कृषिका लागि उपयोगी छ। भोल्गा युरोपकै सबैभन्दा लामो नदी हो, जुन क्यास्पियन सागरमा गएर बग्छ। रूस, पोल्यान्ड, जर्मनी, फ्रान्स र बेल्जियम यहीं पर्छन्।",
+      "३. दक्षिण पर्वतीय क्षेत्र: उच्च हिमाल, पठार र ठाडो ढलान भएको यो भागलाई अल्पाइन माउन्टेन प्रणाली पनि भनिन्छ।"
+    ]
+  },
+  {
+    title: "हावापानी",
+    sub: "Climate",
+    img: WIKI("Santorini_Greece_Island.jpg"),
+    cap: "भूमध्यसागरीय किनार (ग्रिस)",
+    points: [
+      "शीतोष्ण क्षेत्र र लामो समुद्री तटका कारण युरोपका अधिकांश भागमा समशीतोष्ण, सुख्खा र मध्यम वर्षासहित मधुर हावापानी पाइन्छ।",
+      "नर्वे, स्विडेन, फिनल्यान्ड र रूसको आर्कटिक सर्कलभन्दा पर टुन्ड्रा हावापानी पाइन्छ — ग्रीष्म छोटो र जाडो लामो-चिसो हुन्छ।",
+      "अटलान्टिक तटवर्ती भागमा तातो महासागरीय प्रवाहका कारण गर्मी-जाडोमा थोरै मात्र भिन्नता भई वर्षैभरि वर्षा र न्यानोपन रहन्छ।",
+      "भित्री मध्य युरोपेली मैदानमा गर्मीमा वर्षा र उष्ण हावापानी, जाडोमा कम वर्षा र चिसो हुन्छ।",
+      "क्यास्पियन सागरदेखि युराल पर्वतसम्मको भित्री/पूर्वी भागमा मरुभूमि हावापानी पाइन्छ — गर्मीमा अत्यधिक तातो र जाडोमा अत्यधिक चिसो।",
+      "दक्षिणी भाग (भूमध्यसागर किनार — स्पेन, फ्रान्स, इटाली, ग्रिस) मा न्यानो र मधुर भूमध्यसागरीय हावापानी पाइन्छ, जसले जीवनशैलीलाई स्वस्थ र ऊर्जावान् बनाउँछ।"
+    ]
+  },
+  {
+    title: "वनस्पति",
+    sub: "Vegetation",
+    img: WIKI("Lake_Baikal,_Siberian_taiga_on_slopes,_Siberia,_Russia.jpg"),
+    cap: "कोणधारी (टाइगा) जंगल",
+    points: [
+      "हावापानीको विविधताका कारण युरोप महादेशमा वनस्पतिमा पनि विविधता पाइन्छ।",
+      "उत्तरमा टुन्ड्रा हावापानीका कारण लेउ, काइ र साना रुखहरू मात्र पाइन्छन्।",
+      "यसको दक्षिणमा बाक्लो कोणधारी जंगलको बेल्ट छ, जसलाई टाइगा भनिन्छ — यहाँ सल्ला, धुपी जस्ता सदाबहार नरम काठका रुखहरू पाइन्छन्।",
+      "शीतोष्ण घाँसे मैदान ब्ल्याक सी र क्यास्पियन सागरको बीच विशाल क्षेत्रमा पाइन्छ, जसलाई स्टेप्स भनिन्छ।",
+      "युरोपको दक्षिणी भागमा भूमध्यसागरीय प्रकारका वनस्पति पाइन्छन्, जसमा मुख्यतया लामो जरा र बाक्लो पात भएका रुखहरू हुन्छन्।"
+    ]
+  }
+];
+
+const questions = [
+  {
+    q: "युरोप क्षेत्रफलको हिसाबले संसारमा कतिौं महादेश हो?",
+    a: "क्षेत्रफलको हिसाबले युरोप अष्ट्रेलियापछि संसारकै दोस्रो सबैभन्दा सानो महादेश हो, तर विकासमा भने सबैभन्दा अगाडि छ। यसको क्षेत्रफल १,०४,९८,००० वर्ग कि.मि. रहेको छ।"
+  },
+  {
+    q: "युरोपमा कति स्वतन्त्र देशहरू छन्?",
+    a: "सानो महादेश भए पनि युरोपमा ४४ वटा स्वतन्त्र देशहरू र थुप्रै नियन्त्रित क्षेत्रहरू रहेका छन्।"
+  },
+  {
+    q: "युरोपलाई 'प्रायद्वीपको प्रायद्वीप' किन भनिन्छ?",
+    a: "युरोप आफैं एउटा ठूलो प्रायद्वीप हो, र यसभित्र स्क्यान्डिनेभिया, आइबेरियन, इटालियन र ग्रिक जस्ता थुप्रै साना प्रायद्वीपहरू पनि समावेश छन्। त्यसैले यसलाई 'प्रायद्वीपको प्रायद्वीप' भनिन्छ।"
+  },
+  {
+    q: "'युरोप' शब्द कहाँबाट आएको हो?",
+    a: "ग्रिक भाषाको 'युरोपा' शब्दबाट युरोप नाम बनेको हो। ग्रिक पौराणिक कथाअनुसार युरोपा एउटी राजकुमारी थिइन्।"
+  },
+  {
+    q: "जिब्राल्टर स्ट्रेटको भौगोलिक महत्त्व के हो?",
+    a: "स्पेन र मोरक्कोको बीचमा रहेको जिब्राल्टर स्ट्रेटले युरोप महादेशलाई अफ्रिका महादेशबाट छुट्याएको छ।"
+  },
+  {
+    q: "भूपरिवेष्ठित देश भनेको के हो? युरोपमा त्यस्ता कति देश छन्?",
+    a: "चारैतिर जमिनले घेरिएको र समुद्रको पहुँच नभएको देशलाई भूपरिवेष्ठित देश भनिन्छ। युरोपमा स्विट्जरल्यान्ड र अस्ट्रिया लगायत १६ वटा भूपरिवेष्ठित देशहरू छन्।"
+  },
+  {
+    q: "युरोपको भौगोलिक विभाजन कति भागमा गरिन्छ? ती के-के हुन्?",
+    a: "भूस्वरूपको आधारमा युरोपलाई ३ भागमा विभाजन गरिन्छ: (१) उत्तर-पश्चिमी उच्च भूमि (स्क्यान्डिनेभिया), (२) मध्य युरोपेली मैदान, र (३) दक्षिण पर्वतीय क्षेत्र (अल्पाइन प्रणाली)।"
+  },
+  {
+    q: "युरोपको सबैभन्दा लामो नदी कुन हो र यो कहाँ गएर बग्छ?",
+    a: "भोल्गा नदी युरोपकै सबैभन्दा लामो नदी हो। यो आल्प्स र ब्ल्याक सिको क्षेत्रबाट सुरु भई अन्ततः क्यास्पियन सागरमा गएर बग्छ।"
+  },
+  {
+    q: "टाइगा र स्टेप्स भनेको के हो?",
+    a: "उत्तरी युरोपको टुन्ड्रा क्षेत्र मुनि पाइने बाक्लो कोणधारी (सल्ला, धुपी जस्ता) जंगलको बेल्टलाई टाइगा भनिन्छ, भने ब्ल्याक सी र क्यास्पियन सागरको बीचमा पाइने विशाल घाँसे मैदानलाई स्टेप्स भनिन्छ।"
+  },
+  {
+    q: "भूमध्यसागरीय हावापानी कुन-कुन देशमा पाइन्छ?",
+    a: "भूमध्यसागरीय हावापानी स्पेन, फ्रान्स, इटाली र ग्रिसमा पाइन्छ। न्यानो उत्तर आन्ध्र महासागरीय प्रवाहका कारण यहाँको हावापानी न्यानो र मधुर हुन्छ, जसले मानिसको जीवनशैलीलाई स्वस्थ र सक्रिय बनाउँछ।"
+  }
+];
+
+let currentQ = -1;
+
+function showScreen(name){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById('screen-'+name).classList.add('active');
+  document.querySelectorAll('.topbar nav button').forEach(b=>b.classList.remove('current'));
+  document.getElementById('nav-'+name).classList.add('current');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function buildTopics(){
+  const list = document.getElementById('topic-list');
+  topics.forEach((t, i) => {
+    const card = document.createElement('div');
+    card.className = 'topic-card';
+    card.innerHTML = `
+      <button class="topic-head" onclick="toggleTopic(${i})">
+        <span class="tnum">${i+1}</span>
+        <span class="ttitle"><h3>${t.title}</h3><span>${t.sub}</span></span>
+        <span class="chev">▾</span>
+      </button>
+      <div class="topic-body">
+        <div class="topic-body-inner">
+          <div>
+            <img src="${t.img}" alt="${t.title}">
+            <div class="cap">${t.cap}</div>
+          </div>
+          <ul>${t.points.map(p=>`<li>${p}</li>`).join('')}</ul>
+        </div>
+      </div>
+    `;
+    list.appendChild(card);
+  });
+}
+
+function toggleTopic(i){
+  const cards = document.querySelectorAll('.topic-card');
+  cards.forEach((c, idx) => { if(idx !== i) c.classList.remove('open'); });
+  cards[i].classList.toggle('open');
+}
+
+function buildQuestions(){
+  const grid = document.getElementById('q-grid');
+  questions.forEach((q, i) => {
+    const tile = document.createElement('div');
+    tile.className = 'q-tile';
+    tile.id = 'qtile-'+i;
+    tile.onclick = () => openQuestion(i);
+    tile.innerHTML = `<span class="qn">${i+1}</span><span class="ql">प्रश्न</span>`;
+    grid.appendChild(tile);
+  });
+}
+
+function openQuestion(i){
+  currentQ = i;
+  const q = questions[i];
+  document.getElementById('answer-panel').style.display = 'block';
+  document.getElementById('ans-tag').textContent = 'प्रश्न ' + (i+1);
+  document.getElementById('ans-question').textContent = q.q;
+  document.getElementById('ans-text').textContent = q.a;
+  document.getElementById('qtile-'+i).classList.add('answered');
+  document.getElementById('btn-prev').disabled = (i === 0);
+  document.getElementById('btn-next').disabled = (i === questions.length-1);
+  document.getElementById('answer-panel').scrollIntoView({behavior:'smooth', block:'center'});
+}
+
+function navQuestion(dir){
+  const next = currentQ + dir;
+  if(next < 0 || next >= questions.length) return;
+  openQuestion(next);
+}
+
+buildTopics();
+buildQuestions();
+</script>
+</body>
+</html>
